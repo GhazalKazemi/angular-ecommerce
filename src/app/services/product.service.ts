@@ -10,6 +10,7 @@ import {ProductCategory} from "../common/product-category";
 })
 export class ProductService {
   private baseUrl = 'http://localhost:8080/api/products';
+  private categoryUrl = 'http://localhost:8080/api/product-category';
   constructor(private httpClient:HttpClient) { }
 
   getProductList(categoryId: number): Observable<Product[]>{
@@ -20,8 +21,10 @@ export class ProductService {
     );
   }
 
-  getProductCategories() {
-
+  getProductCategories(): Observable<ProductCategory[]> {
+    return this.httpClient.get<GetResponseProductCategory>(this.categoryUrl).pipe(
+      map(response => response._embedded.productCategory)
+    );
   }
 }
 interface GetResponseProduct{
