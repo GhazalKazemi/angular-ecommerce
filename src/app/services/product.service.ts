@@ -18,6 +18,10 @@ export class ProductService {
       map(response => response._embedded.products)
     );
   }
+
+  getProductCategories() {
+
+  }
 }
 interface GetResponse{
   _embedded: {
