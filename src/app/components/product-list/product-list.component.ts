@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Product} from "../../common/product";
 import {ProductService} from "../../services/product.service";
 import {ActivatedRoute} from "@angular/router";
@@ -17,7 +17,7 @@ export class ProductListComponent implements OnInit {
 
   pageNumber: number = 1;
   pageSize: number = 5;
-  totalElements: number =0;
+  totalElements: number = 0;
 
   previousKeyword: string = null;
 
@@ -30,44 +30,45 @@ export class ProductListComponent implements OnInit {
     });
 
   }
-  listProducts(){
+
+  listProducts() {
     this.searchMode = this.route.snapshot.paramMap.has('keyword');
-    if (this.searchMode){
+    if (this.searchMode) {
       this.handleSearchProducts();
-    }else {
+    } else {
       this.handleListProducts();
     }
   }
-  handleSearchProducts(){
+
+  handleSearchProducts() {
     // @ts-ignore
     const keyword: string = this.route.snapshot.paramMap.get('keyword');
-    if (this.previousKeyword != keyword){
+    if (this.previousKeyword != keyword) {
       this.pageNumber = 1;
     }
     this.previousKeyword = keyword;
-    this.productService.searchProducts(keyword).subscribe(
-      data => {
-        this.products = data;
-      }
-    );
+    this.productService.searchProductsPaginate(this.pageNumber - 1,
+      this.pageSize,
+      keyword).subscribe(this.processResult());
 
   }
-  handleListProducts(){
+
+  handleListProducts() {
     const hasCategoryId: boolean = this.route.snapshot.paramMap.has('id');
-    if (hasCategoryId){
+    if (hasCategoryId) {
 
       // @ts-ignore
 
       this.currentCategoryId = +this.route.snapshot.paramMap.get('id');
-    }else {
-      this.currentCategoryId =1;
+    } else {
+      this.currentCategoryId = 1;
     }
-    if (this.previousCategoryId != this.currentCategoryId){
+    if (this.previousCategoryId != this.currentCategoryId) {
       this.pageNumber = 1;
     }
     this.previousCategoryId = this.currentCategoryId;
 
-    this.productService.getProductListPaginate(this.pageNumber -1,
+    this.productService.getProductListPaginate(this.pageNumber - 1,
       this.pageSize,
       this.currentCategoryId).subscribe(this.processResult());
   }
@@ -76,13 +77,13 @@ export class ProductListComponent implements OnInit {
     // @ts-ignore
     return data => {
       this.products = data._embedded.products;
-      this.pageNumber = data.page.number +1;
+      this.pageNumber = data.page.number + 1;
       this.pageSize = data.page.size;
       this.totalElements = data.page.totalElements;
     };
   }
 
-  updatePageSize(pageSize: string){
+  updatePageSize(pageSize: string) {
     this.pageSize = +pageSize;
     this.pageNumber = 1;
     this.listProducts();
