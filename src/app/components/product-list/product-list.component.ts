@@ -75,8 +75,9 @@ export class ProductListComponent implements OnInit {
       this.totalElements = data.page.totalElements;
     };
   }
-  updatePageSize(pageSize: number){
-    this.pageSize = pageSize;
+
+  updatePageSize(pageSize: string){
+    this.pageSize = +pageSize;
     this.pageNumber = 1;
     this.listProducts();
   }
