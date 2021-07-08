@@ -19,6 +19,8 @@ export class ProductListComponent implements OnInit {
   pageSize: number = 5;
   totalElements: number =0;
 
+  previousKeyword: string = null;
+
   constructor(private productService: ProductService, private route: ActivatedRoute) {
   }
 
@@ -39,6 +41,10 @@ export class ProductListComponent implements OnInit {
   handleSearchProducts(){
     // @ts-ignore
     const keyword: string = this.route.snapshot.paramMap.get('keyword');
+    if (this.previousKeyword != keyword){
+      this.pageNumber = 1;
+    }
+    this.previousKeyword = keyword;
     this.productService.searchProducts(keyword).subscribe(
       data => {
         this.products = data;
