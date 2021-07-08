@@ -1,23 +1,14 @@
 export class Product {
-  sku: string;
-  name: string;
-  description: string;
-  unitPrice: number;
-  imageUrl: string;
-  active: boolean;
-  unitsInStock: number;
-  dateCreated: Date;
-  lastUpdated: Date;
+  id: String = '';
+  sku: string = '';
+  name: string = '';
+  description: string = '';
+  unitPrice: number = 0;
+  imageUrl: string = '';
+  active: boolean = false;
+  unitsInStock: number = 0;
+  dateCreated: Date = new Date();
+  lastUpdated: Date = new Date();
 
-  constructor(sku: string, name: string, description: string, unitPrice: number, imageUrl: string, active: boolean, unitsInStock: number, dateCreated: Date, lastUpdated: Date) {
-    this.sku = sku;
-    this.name = name;
-    this.description = description;
-    this.unitPrice = unitPrice;
-    this.imageUrl = imageUrl;
-    this.active = active;
-    this.unitsInStock = unitsInStock;
-    this.dateCreated = dateCreated;
-    this.lastUpdated = lastUpdated;
-  }
+
 }
