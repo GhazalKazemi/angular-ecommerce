@@ -10,13 +10,16 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class ProductListComponent implements OnInit {
 
-  products: Product[];
-  currentCategoryId: number;
-  searchMode: boolean;
+  products: Product[] = [];
+  currentCategoryId: number = 1;
+  previousCategoryId: number = 1;
+  searchMode: boolean = false;
+
+  pageNumber: number = 1;
+  pageSize: number = 10;
+  totalElements: number =0;
+
   constructor(private productService: ProductService, private route: ActivatedRoute) {
-    this.products = [];
-    this.currentCategoryId = 0;
-    this.searchMode = false;
   }
 
   ngOnInit(): void {
