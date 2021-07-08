@@ -56,10 +56,23 @@ export class ProductListComponent implements OnInit {
     }else {
       this.currentCategoryId =1;
     }
-    this.productService.getProductList(this.currentCategoryId).subscribe(
-      data => {
-        this.products = data;
-      }
-    )
+    if (this.previousCategoryId != this.currentCategoryId){
+      this.pageNumber = 1;
+    }
+    this.previousCategoryId = this.currentCategoryId;
+
+    this.productService.getProductListPaginate(this.pageNumber -1,
+      this.pageSize,
+      this.currentCategoryId).subscribe(this.processResult());
+  }
+
+  private processResult() {
+    // @ts-ignore
+    return data => {
+      this.products = data._embedded.products;
+      this.pageNumber = data.page.number +1;
+      this.pageSize = data.page.size;
+      this.totalElements = data.page.totalElements;
+    };
   }
 }
