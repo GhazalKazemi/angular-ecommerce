@@ -14,6 +14,7 @@ export class CartService {
 
   addToCart(cartItem: CartItem){
     let alreadyExistInCart: boolean = false;
+    // @ts-ignore
     let existingCartItems: CartItem = undefined;
     if (this.cartItems.length > 0){
       for (let tempCartItem of this.cartItems){
@@ -36,6 +37,13 @@ export class CartService {
   }
 
   private computeCartTotals() {
-
+    let totalPriceValue: number = 0;
+    let totalQuantityValue: number = 0;
+    for (let currentCartItem of this.cartItems){
+      totalPriceValue += currentCartItem.quantity * currentCartItem.unitPrice;
+      totalQuantityValue += currentCartItem.quantity;
+    }
+    this.totalPrice.next(totalPriceValue);
+    this.totalQuantity.next(totalQuantityValue);
   }
 }
