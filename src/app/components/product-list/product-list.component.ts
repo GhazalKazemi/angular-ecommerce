@@ -19,7 +19,7 @@ export class ProductListComponent implements OnInit {
   pageSize: number = 5;
   totalElements: number = 0;
 
-  previousKeyword: string = null;
+  previousKeyword: string = '';
 
   constructor(private productService: ProductService, private route: ActivatedRoute) {
   }
