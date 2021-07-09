@@ -17,12 +17,14 @@ export class CartService {
     // @ts-ignore
     let existingCartItems: CartItem = undefined;
     if (this.cartItems.length > 0){
-      for (let tempCartItem of this.cartItems){
-        if (tempCartItem.id === cartItem.id){
-          existingCartItems = tempCartItem;
-          break;
-        }
-      }
+      // @ts-ignore
+      existingCartItems = this.cartItems.find(tempCartItem => tempCartItem.id === cartItem.id);
+      // for (let tempCartItem of this.cartItems){
+      //   if (tempCartItem.id === cartItem.id){
+      //     existingCartItems = tempCartItem;
+      //     break;
+      //   }
+      // }
       alreadyExistInCart = (existingCartItems != undefined);
     }
     if (alreadyExistInCart){
