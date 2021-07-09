@@ -11,4 +11,31 @@ export class CartService {
   totalQuantity: Subject<number> = new Subject<number>();
 
   constructor() { }
+
+  addToCart(cartItem: CartItem){
+    let alreadyExistInCart: boolean = false;
+    let existingCartItems: CartItem = undefined;
+    if (this.cartItems.length > 0){
+      for (let tempCartItem of this.cartItems){
+        if (tempCartItem.id === cartItem.id){
+          existingCartItems = tempCartItem;
+          break;
+        }
+      }
+      alreadyExistInCart = (existingCartItems != undefined);
+    }
+    if (alreadyExistInCart){
+      existingCartItems.quantity++;
+    }else {
+      this.cartItems.push(cartItem);
+    }
+
+    //total price and total quantity:
+    this.computeCartTotals();
+
+  }
+
+  private computeCartTotals() {
+
+  }
 }
