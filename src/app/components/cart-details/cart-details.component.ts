@@ -40,6 +40,6 @@ export class CartDetailsComponent implements OnInit {
   }
 
   remove(cartItem: CartItem) {
-    
+    this.cartService.remove(cartItem);
   }
 }

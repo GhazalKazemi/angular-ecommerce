@@ -58,7 +58,7 @@ export class CartService {
     }
   }
 
-  private remove(cartItem: CartItem) {
+  remove(cartItem: CartItem) {
     const itemIndex = this.cartItems.findIndex(tempCartItem => tempCartItem.id === cartItem.id);
     if (itemIndex > -1){
       this.cartItems.splice(itemIndex, 1);
