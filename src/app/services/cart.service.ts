@@ -48,4 +48,17 @@ export class CartService {
     this.totalPrice.next(totalPriceValue);
     this.totalQuantity.next(totalQuantityValue);
   }
+
+  decrementQuantity(cartItem: CartItem) {
+    cartItem.quantity--;
+    if (cartItem.quantity === 0){
+      this.remove(cartItem);
+    }else {
+      this.computeCartTotals();
+    }
+  }
+
+  private remove(cartItem: CartItem) {
+    
+  }
 }
