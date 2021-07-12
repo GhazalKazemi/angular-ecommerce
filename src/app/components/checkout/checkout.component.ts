@@ -10,6 +10,8 @@ export class CheckoutComponent implements OnInit {
   // @ts-ignore
   checkoutFormGroup: FormGroup;
 
+  totalPrice: number = 0;
+  totalQuantity: number =0;
   constructor(private formBuilder: FormBuilder) {
   }
 
